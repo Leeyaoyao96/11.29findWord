@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>11.29test</title>
+		<style>
+			#get_info{
+				border:none;
+				background: #bbb;
+				cursor: pointer;
+				outline: none;
+			}
+			#text,#get_info{
+				height: 30px;
+				border-radius: 6px;
+			}
+			#text{
+				border: 1px solid #bbb;
+				text-indent: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="text" autofocus/>
+		<button id="get_info">get information</button>
+	</body>
+	<script type="text/javascript">
+		var content = document.getElementById("text")
+		var get_info=document.getElementById("get_info")
+		
+		get_info.onclick = function() {
+			if(content.value.length==0){
+				alert("不能为空")
+			}else{
+				var arr = [];
+				arr = content.value.split('')
+				//console.log(arr)
+				var count_arr = [];
+				for(var i = 0; i < arr.length; i++) {
+					var count = 1;
+					for(var j = i + 1; j < arr.length; j++) {
+						if(arr[i] == arr[j]){
+							count++;
+						}
+					}
+					count_arr.push(count)
+				}
+				//每个字母出现的次数写在count_arr里
+				
+				//求最大值所在位置count_arr.indexOf(Math.max.apply(Math, count_arr))
+				var posit = count_arr.indexOf(Math.max.apply(Math, count_arr));
+				var arr_index = [];
+				var idx = arr.indexOf(arr[posit]);
+				while (idx != -1) {
+				  arr_index.push(idx);
+				  idx = arr.indexOf(arr[posit], idx + 1);
+				}
+				//判断索引位置放在arr_index里
+				alert("出现次数最多的为：" + arr[posit]+ " ，一共出现：" + count_arr[posit] + "次 ，"+ "索引位置："+ arr_index)
+			}
+			
+		}
+	</script>
+</html>
